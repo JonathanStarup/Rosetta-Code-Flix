@@ -13,7 +13,8 @@ mod Test {
         }
     }
 
-    def assertEq(expect: {expect = t}, actual: t): Unit \ Test with Eq[t], ToString[t] = {
+    def assertEq
+    (expect: {expect = t}, actual: t): Unit \ Test with Eq[t], ToString[t] = {
         if (expect#expect == actual) ()
         else Test.fail("Expected ${expect#expect}\nFound:   ${actual}")
     }

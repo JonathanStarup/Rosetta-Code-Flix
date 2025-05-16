@@ -16,26 +16,29 @@
 //
 // Task
 //
-// Answer the question: what state are the doors in after the last pass? Which are open, which are closed?
+// Answer the question: what state are the doors in after the last pass? Which
+// are open, which are closed?
 //
 mod Rosetta_100_doors {
     use Add.add
 
-    pub def mainImperative(): Vector[Bool] = unsafely OutOfBounds run region local {
-        let init = Array.repeat(local, 100, false);
-        foreach (start <- Vector.range(0, 100)) {
-            let i = Ref.fresh(local, start);
-            let skip = start + 1;
-            while(() -> Ref.get(i) < 100)(() -> {
-                init[Ref.get(i)] = not init[Ref.get(i)];
-                i |> Ref.transform(add(skip))
-            })
-        };
-        init |> Array.toVector
-    }
+    pub def mainImperative(): Vector[Bool] =
+        unsafely OutOfBounds run region local {
+            let init = Array.repeat(local, 100, false);
+            foreach (start <- Vector.range(0, 100)) {
+                let i = Ref.fresh(local, start);
+                let skip = start + 1;
+                while(() -> Ref.get(i) < 100)(() -> {
+                    init[Ref.get(i)] = not init[Ref.get(i)];
+                    i |> Ref.transform(add(skip))
+                })
+            };
+            init |> Array.toVector
+        }
 
     /// If `cond` returns true, run `body` and repeat.
-    def while(cond: Unit -> Bool \ ef1, body: Unit -> Unit \ ef2): Unit \ ef1 + ef2 = {
+    def while
+    (cond: Unit -> Bool \ ef1, body: Unit -> Unit \ ef2): Unit \ ef1 + ef2 = {
         if (cond()) {
             body();
             while(cond, body)
@@ -53,12 +56,11 @@ mod Rosetta_100_doors {
         traverse(init, 0)
     }
 
-    def swapVector(skip: Int32, v: Vector[Bool]): Vector[Bool] = {
+    def swapVector(skip: Int32, v: Vector[Bool]): Vector[Bool] =
         v |> Vector.mapWithIndex((i, d) -> {
             if (Int32.modulo(i + 1, skip + 1) == 0) not d
             else d
         })
-    }
 
     pub def mainFreeForm(): Vector[Bool] = region local {
         let init = Array.repeat(local, 100, false);
