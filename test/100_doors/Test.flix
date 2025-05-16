@@ -22,12 +22,12 @@ mod Test.Rosetta_100_doors {
 
     @Test
     pub def functional(): Bool \ IO = run {
-        Test.assertEq(expect = answer(), Rosetta_100_doors.mainFunctional())
+        assertEq(expect = answer(), Rosetta_100_doors.mainFunctional())
     } with runTest
 
     @Test
     pub def freeForm(): Bool \ IO = run {
-        Test.assertEq(expect = answer(), Rosetta_100_doors.mainImperative())
+        assertEq(expect = answer(), Rosetta_100_doors.mainImperative())
     } with runTest
 
 }
